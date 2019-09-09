@@ -1,4 +1,4 @@
-package io.github.ododmc.simpletogglesprint;
+package dev.odod.simpletogglesprint;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 @Mod(modid = SimpleToggleSprint.MODID, version = SimpleToggleSprint.VERSION)
 public class SimpleToggleSprint {
     public static final String MODID = "simpletogglesprint";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "1.0.1";
 
     private KeyBinding toggleSprint;
     private Minecraft mc;
