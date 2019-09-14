@@ -1,11 +1,9 @@
 package dev.odod.simpletogglesprint;
 
-import dev.odod.simpletogglesprint.commands.SimpleToggleSprintCommands;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -26,20 +24,17 @@ public class SimpleToggleSprint {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-
         MinecraftForge.EVENT_BUS.register(this);
-        ClientCommandHandler.instance.registerCommand(new SimpleToggleSprintCommands());
 
+        this.toggleSprint = new KeyBinding("Toggle Sprint", 29, "key.categories.movement");
+        ClientRegistry.registerKeyBinding(this.toggleSprint);
 
-        toggleSprint = new KeyBinding("Toggle Sprint", 29, "key.categories.movement");
-        ClientRegistry.registerKeyBinding(toggleSprint);
-
-        mc = Minecraft.getMinecraft();
+        this.mc = Minecraft.getMinecraft();
     }
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent e) {
-        if (toggleSprint.isPressed()) {
+        if (this.toggleSprint.isPressed()) {
             if (toggled) {
                 mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Togglesprint disabled."));
             } else {
