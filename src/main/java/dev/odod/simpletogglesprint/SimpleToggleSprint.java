@@ -1,7 +1,6 @@
 package dev.odod.simpletogglesprint;
 
 import dev.odod.simpletogglesprint.commands.SimpleToggleSprintCommands;
-import dev.odod.simpletogglesprint.settings.Settings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.ChatComponentText;
@@ -23,25 +22,19 @@ public class SimpleToggleSprint {
     private KeyBinding toggleSprint;
     private Minecraft mc;
     private static boolean toggled = true;
-    private Settings settings = new Settings();
+
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
 
         MinecraftForge.EVENT_BUS.register(this);
-        ClientCommandHandler.instance.registerCommand(new SimpleToggleSprintCommands(this));
+        ClientCommandHandler.instance.registerCommand(new SimpleToggleSprintCommands());
 
 
         toggleSprint = new KeyBinding("Toggle Sprint", 29, "key.categories.movement");
         ClientRegistry.registerKeyBinding(toggleSprint);
-        settings.cfgLoad();
 
         mc = Minecraft.getMinecraft();
-    }
-
-
-    public Settings getSettings() {
-        return settings;
     }
 
     @SubscribeEvent

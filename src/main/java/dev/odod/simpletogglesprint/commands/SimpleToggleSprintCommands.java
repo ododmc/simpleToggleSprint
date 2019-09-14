@@ -9,12 +9,6 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class SimpleToggleSprintCommands extends CommandBase {
 
-    private SimpleToggleSprint mod;
-
-    public SimpleToggleSprintCommands(SimpleToggleSprint mod) {
-        this.mod = mod;
-    }
-
     @Override
     public String getCommandName() {
         return "togglesprint";
@@ -31,14 +25,9 @@ public class SimpleToggleSprintCommands extends CommandBase {
             sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + getCommandUsage(sender)));
         }
     }
-    
+
     @Override
     public int getRequiredPermissionLevel() {
         return 0;
-    }
-
-    @Override
-    public boolean canCommandSenderUseCommand(final ICommandSender p_71519_1_) {
-        return true;
     }
 }
