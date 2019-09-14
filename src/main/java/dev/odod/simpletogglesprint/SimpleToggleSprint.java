@@ -2,7 +2,6 @@ package dev.odod.simpletogglesprint;
 
 import dev.odod.simpletogglesprint.commands.SimpleToggleSprintCommands;
 import dev.odod.simpletogglesprint.settings.Settings;
-import dev.odod.simpletogglesprint.sprint.SimpleToggleSprinter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.ChatComponentText;
@@ -20,8 +19,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 public class SimpleToggleSprint {
     public static final String MODID = "simpletogglesprint";
     public static final String VERSION = "1.0.1";
+
+    private KeyBinding toggleSprint;
+    private Minecraft mc;
+    private static boolean toggled = true;
     private Settings settings = new Settings();
-    private Minecraft mc = Minecraft.getMinecraft();
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
@@ -29,17 +31,18 @@ public class SimpleToggleSprint {
         MinecraftForge.EVENT_BUS.register(this);
         ClientCommandHandler.instance.registerCommand(new SimpleToggleSprintCommands(this));
 
-        // registers default key for togglesprint as created in sprinter class
+
         toggleSprint = new KeyBinding("Toggle Sprint", 29, "key.categories.movement");
         ClientRegistry.registerKeyBinding(toggleSprint);
-
-        // loads settings from the cfg file
         settings.cfgLoad();
 
+        mc = Minecraft.getMinecraft();
     }
 
-    private static boolean toggled = true;
-    public KeyBinding toggleSprint = new KeyBinding("Toggle Sprint", 29, "key.categories.movement");
+
+    public Settings getSettings() {
+        return settings;
+    }
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent e) {
@@ -60,11 +63,4 @@ public class SimpleToggleSprint {
             KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.getKeyCode(), false);
         }
     }
-
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-
 }
